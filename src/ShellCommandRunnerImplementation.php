@@ -56,8 +56,6 @@ final readonly class ShellCommandRunnerImplementation implements ShellCommandRun
             return false;
         }
 
-        assert($result !== '');
-
         return $result;
     }
 }
