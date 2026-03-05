@@ -4,7 +4,7 @@
 
 # sebastian/git-state
 
-Library for filtering files, extracted from `phpunit/phpunit`.
+Library for describing the state of a Git checkout.
 
 ## Installation
 
