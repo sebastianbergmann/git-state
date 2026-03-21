@@ -23,7 +23,9 @@ final readonly class GitCommandRunner
     public function __construct(?ShellCommandRunner $runner = null)
     {
         if ($runner === null) {
+            // @codeCoverageIgnoreStart
             $runner = new ShellCommandRunnerImplementation;
+            // @codeCoverageIgnoreEnd
         }
 
         $this->runner = $runner;

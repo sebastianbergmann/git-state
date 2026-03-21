@@ -39,7 +39,9 @@ final readonly class ShellCommandRunnerImplementation implements ShellCommandRun
         );
 
         if (!is_resource($process)) {
+            // @codeCoverageIgnoreStart
             return false;
+            // @codeCoverageIgnoreEnd
         }
 
         assert(isset($pipes[1]) && is_resource($pipes[1]));
