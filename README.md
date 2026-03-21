@@ -19,3 +19,36 @@ If you only need this library during development, for instance to run your proje
 ```
 composer require --dev sebastian/git-state
 ```
+
+## Usage
+
+#### `test.php`
+```php
+use SebastianBergmann\GitState\Builder;
+
+$builder = new Builder;
+$state   = $builder->build();
+
+if ($state === false) {
+    // Not a Git repository or no origin remote configured
+    exit(1);
+}
+
+print $state->originUrl() . PHP_EOL;
+print $state->branch() . PHP_EOL;
+print $state->commit() . PHP_EOL;
+
+if ($state->isClean()) {
+    print 'Working directory is clean' . PHP_EOL;
+} else {
+    print $state->status() . PHP_EOL;
+}
+```
+
+```
+github.com:sebastianbergmann/git-state.git
+main
+ab00820c3757dbd30a8caa185aa4515b98713238
+M README.md
+?? test.php
+```
