@@ -39,5 +39,5 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ env.RELEASE_TAG }}
-          name: sebastian/file-filter ${{ env.RELEASE_TAG }}
+          name: sebastian/git-state ${{ env.RELEASE_TAG }}
           bodyFile: release-notes.md

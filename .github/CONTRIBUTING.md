@@ -1,4 +1,4 @@
-# Contributing to `sebastian/file-filter`
+# Contributing to `sebastian/git-state`
 
 ## Welcome!
 
