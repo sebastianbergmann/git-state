@@ -64,8 +64,6 @@ final readonly class Builder
         if (str_contains($originUrl, '@')) {
             $tmp = explode('@', $originUrl);
 
-            assert(isset($tmp[1]));
-
             $originUrl = $tmp[1];
         }
 
