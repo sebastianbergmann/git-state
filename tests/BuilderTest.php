@@ -151,6 +151,60 @@ final class BuilderTest extends TestCase
         $this->assertFalse($result->isClean());
     }
 
+    public function testReturnsCommitThatIsCheckedOut(): void
+    {
+        $stub = $this->createStub(ShellCommandRunner::class);
+
+        $stub
+            ->method('run')
+            ->willReturn(self::COMMIT);
+
+        $builder = new Builder(new GitCommandRunner($stub));
+
+        $this->assertSame(self::COMMIT, $builder->commit());
+    }
+
+    public function testDoesNotRequireOriginRemoteForCommit(): void
+    {
+        $mock = $this->createMock(ShellCommandRunner::class);
+
+        $mock
+            ->expects($this->once())
+            ->method('run')
+            ->with($this->stringEndsWith('git rev-parse --verify HEAD'))
+            ->willReturn(self::COMMIT);
+
+        $builder = new Builder(new GitCommandRunner($mock));
+
+        $this->assertSame(self::COMMIT, $builder->commit());
+    }
+
+    public function testReturnsFalseForCommitWhenCommandFails(): void
+    {
+        $stub = $this->createStub(ShellCommandRunner::class);
+
+        $stub
+            ->method('run')
+            ->willReturn(false);
+
+        $builder = new Builder(new GitCommandRunner($stub));
+
+        $this->assertFalse($builder->commit());
+    }
+
+    public function testReturnsFalseForCommitWhenCommandHasNoOutput(): void
+    {
+        $stub = $this->createStub(ShellCommandRunner::class);
+
+        $stub
+            ->method('run')
+            ->willReturn('');
+
+        $builder = new Builder(new GitCommandRunner($stub));
+
+        $this->assertFalse($builder->commit());
+    }
+
     public function testStripsCredentialsFromSshUrl(): void
     {
         $stub = $this->createStub(ShellCommandRunner::class);
